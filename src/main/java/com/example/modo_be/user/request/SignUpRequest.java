@@ -5,6 +5,7 @@ import com.example.modo_be.user.exception.UserInvalidRequest;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
 
 import javax.validation.constraints.NotBlank;
 
@@ -46,27 +47,25 @@ public class SignUpRequest {
         if(pw.matches(".*[0-9].*") && pw.toLowerCase().matches(".*[a-z].*")){
             //통과
             return;
-
         }
         else{
             throw new UserInvalidRequest(pw, "password must contains number and character.");
         }
-
-        // pw 8 word , contains int, string
-        // ID duplicate test
-
-        //phoneNum, lat, long, addr, nickname
-
     }
 
-    public User toEntity(){
+    public User toEntity(String rawPw){
         // encrypt here , validation 반드시 진행 후 Entity 변환
-        return User.builder().userId(this.id).userPw(this.pw)
+        String encodePassword = encodePassWord(rawPw);
+
+        return User.builder().userId(this.id).userPw(encodePassword)
                 .userAddress(this.address).userLatitude(this.latitude)
                 .userLongitude(this.longitude).userNickName(this.nickName)
                 .userPhoneNum(this.phoneNum)
                 .build();
+    }
 
+    public String encodePassWord(String rawPw){
+        return BCrypt.hashpw(rawPw, BCrypt.gensalt());
     }
 
 

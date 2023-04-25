@@ -23,7 +23,7 @@ public class UserService {
             throw new UserNotFound();
         }
 
-        User user = signUpRequest.toEntity();
+        User user = signUpRequest.toEntity(signUpRequest.getPw());
         userRepository.save(user);
         // entity save
     }

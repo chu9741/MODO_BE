@@ -1,5 +1,6 @@
 package com.example.modo_be.user.service;
 
+import com.example.modo_be.user.domain.User;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,29 @@ class UserServiceTest {
         //then
         assertEquals(userRepository.count(),1);
     }
+
+
+    @Test
+    @DisplayName("비밀번호 암호화 테스트")
+    void test2(){
+        //given
+        SignUpRequest signUpRequest = SignUpRequest.builder()
+                .id("chu9741").pw("chu970401")
+                .address("경기도 고양시").latitude("1").longitude("2")
+                .nickName("최현욱").phoneNum("010-1234-5678").build();
+
+
+        //when
+        User user = signUpRequest.toEntity(signUpRequest.getPw());
+
+        //then
+
+        assertNotEquals(signUpRequest.getPw(),user.getUserPw());
+
+
+    }
+
+
+
 
 }
