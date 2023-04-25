@@ -1,0 +1,83 @@
+package com.example.modo_be.user.request;
+
+import com.example.modo_be.user.domain.User;
+import com.example.modo_be.user.exception.UserInvalidRequest;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
+
+@Getter
+@Setter
+public class SignUpRequest {
+
+    @NotBlank(message = "ID는 필수로 입력해야 합니다.")
+    private final String id;
+
+    @NotBlank(message = "PW는 필수로 입력해야 합니다.")
+    private final String pw;
+
+    @NotBlank(message = "닉네임은 필수로 입력해야 합니다.")
+    private final String nickName;
+
+    @NotBlank(message = "주소는 필수로 입력해야 합니다..")
+    private final String address;
+
+    @NotBlank(message = "경도는 필수로 입력되어야 합니다.")
+    private final String longitude;
+
+    @NotBlank(message = "위도는 필수로 입력되어야 합니다.")
+    private final String latitude;
+
+    @NotBlank(message = "휴대폰 번호는 필수로 입력해야 합니다.")
+    private final String phoneNum;
+
+    public void validate(){
+        if(pw.isBlank()){
+            throw new UserInvalidRequest(pw, "password is blank");
+        }
+        if(pw.equals("")){
+            throw new UserInvalidRequest(pw,"password is empty");
+        }
+        if(pw.length() < 8){
+            throw new UserInvalidRequest(pw, "password must over 7 words.");
+        }
+        if(pw.matches(".*[0-9].*") && pw.toLowerCase().matches(".*[a-z].*")){
+            //통과
+            return;
+
+        }
+        else{
+            throw new UserInvalidRequest(pw, "password must contains number and character.");
+        }
+
+        // pw 8 word , contains int, string
+        // ID duplicate test
+
+        //phoneNum, lat, long, addr, nickname
+
+    }
+
+    public User toEntity(){
+        // encrypt here , validation 반드시 진행 후 Entity 변환
+        return User.builder().userId(this.id).userPw(this.pw)
+                .userAddress(this.address).userLatitude(this.latitude)
+                .userLongitude(this.longitude).userNickName(this.nickName)
+                .userPhoneNum(this.phoneNum)
+                .build();
+
+    }
+
+
+    @Builder
+    public SignUpRequest(String id, String pw, String nickName, String address, String longitude, String latitude, String phoneNum) {
+        this.id = id;
+        this.pw = pw;
+        this.nickName = nickName;
+        this.address = address;
+        this.longitude = longitude;
+        this.latitude = latitude;
+        this.phoneNum = phoneNum;
+    }
+}
