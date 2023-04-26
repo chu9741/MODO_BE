@@ -1,9 +1,10 @@
 package com.example.modo_be.user.controller;
 
+import com.example.modo_be.user.exception.UserAlreadyExist;
 import com.example.modo_be.user.exception.UserException;
 import com.example.modo_be.user.exception.UserInvalidRequest;
 import com.example.modo_be.user.exception.UserNotFound;
-import com.example.modo_be.user.response.ErrorResponse;
+import com.example.modo_be.common.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -44,6 +45,17 @@ public class ExceptionController {
                 .build();
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(UserAlreadyExist.class)
+    public ResponseEntity<ErrorResponse> userAlreadyExistHandler(UserAlreadyExist e){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code(String.valueOf(e.statusCode()))
+                .message(e.getMessage())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
 
 }
