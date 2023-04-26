@@ -2,6 +2,7 @@ package com.example.modo_be.user.service;
 
 
 import com.example.modo_be.user.domain.User;
+import com.example.modo_be.user.exception.UserAlreadyExist;
 import com.example.modo_be.user.exception.UserNotFound;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
@@ -20,7 +21,7 @@ public class UserService {
 
         // ID duplicaiton check는 여기서
         if(userRepository.existsByUserId(signUpRequest.getId())){
-            throw new UserNotFound();
+            throw new UserAlreadyExist();
         }
 
         User user = signUpRequest.toEntity(signUpRequest.getPw());
