@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public void signUp(SignUpRequest signUpRequest){
-        signUpRequest.validate();
+        signUpRequest.passwordValidation();
 
 
         // ID duplicaiton check는 여기서

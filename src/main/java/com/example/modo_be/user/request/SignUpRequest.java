@@ -34,7 +34,7 @@ public class SignUpRequest {
     @NotBlank(message = "휴대폰 번호는 필수로 입력해야 합니다.")
     private final String phoneNum;
 
-    public void validate(){
+    public void passwordValidation(){
         if(pw.isBlank()){
             throw new UserInvalidRequest(pw, "password is blank");
         }
