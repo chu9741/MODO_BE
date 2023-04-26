@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
-public class ExceptionController {
+public class UserExceptionController {
 
     @ResponseBody
     @ExceptionHandler(UserException.class)

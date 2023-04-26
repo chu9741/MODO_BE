@@ -1,4 +1,4 @@
-package com.example.modo_be.user.response;
+package com.example.modo_be.common.response;
 
 
 import lombok.Builder;
