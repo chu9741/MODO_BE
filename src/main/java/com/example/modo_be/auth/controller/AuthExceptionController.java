@@ -34,6 +34,6 @@ public class AuthExceptionController {
                 .message(e.getMessage())
                 .build();
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+        return ResponseEntity.badRequest().body(errorResponse);
     }
 }
