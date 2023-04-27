@@ -41,15 +41,13 @@ class UserControllerTest {
 
 
     @Test
-    @DisplayName("유저 생성 - 올바른 케이스")
+    @DisplayName("유저 생성")
     public void test1() throws Exception {
         //given
         SignUpRequest signUpRequest =SignUpRequest.builder()
                 .id("chu9741").pw("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("최현욱").phoneNum("010-1234-5678").build();
-
-        userService.signUp(signUpRequest);
 
         String json = objectMapper.writeValueAsString(signUpRequest);
 
@@ -61,4 +59,5 @@ class UserControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
+
 }

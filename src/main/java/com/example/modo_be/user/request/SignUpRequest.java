@@ -34,7 +34,7 @@ public class SignUpRequest {
     @NotBlank(message = "휴대폰 번호는 필수로 입력해야 합니다.")
     private final String phoneNum;
 
-    public void validate(){
+    public void passwordValidation(){
         if(pw.isBlank()){
             throw new UserInvalidRequest(pw, "password is blank");
         }
@@ -44,12 +44,14 @@ public class SignUpRequest {
         if(pw.length() < 8){
             throw new UserInvalidRequest(pw, "password must over 7 words.");
         }
-        if(pw.matches(".*[0-9].*") && pw.toLowerCase().matches(".*[a-z].*")){
+        if(!pw.matches(".*[^a-zA-Z0-9].*")
+                && pw.matches(".*[0-9].*")
+                && pw.toLowerCase().matches(".*[a-z].*")){
             //통과
             return;
         }
         else{
-            throw new UserInvalidRequest(pw, "password must contains number and character.");
+            throw new UserInvalidRequest(pw, "password must contains only number and character.");
         }
     }
 

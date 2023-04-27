@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @Slf4j
+//@ExtendWith(SpringExtension.class)
 @SpringBootTest
 class UserServiceTest {
 
@@ -35,13 +36,13 @@ class UserServiceTest {
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .id("chu9741").pw("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
-                .nickName("최현욱").phoneNum("010-1234-5678").build();
+                .nickName("김승민").phoneNum("010-1234-5678").build();
 
         //when
         userService.signUp(signUpRequest);
 
         //then
-        assertEquals(userRepository.count(),1);
+        assertEquals(1L,userRepository.count());
     }
 
 
@@ -52,7 +53,7 @@ class UserServiceTest {
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .id("chu9741").pw("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
-                .nickName("최현욱").phoneNum("010-1234-5678").build();
+                .nickName("김승민").phoneNum("010-1234-5678").build();
 
 
         //when
@@ -62,10 +63,5 @@ class UserServiceTest {
 
         assertNotEquals(signUpRequest.getPw(),user.getUserPw());
 
-
     }
-
-
-
-
 }

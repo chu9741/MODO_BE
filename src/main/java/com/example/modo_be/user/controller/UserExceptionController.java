@@ -5,12 +5,16 @@ import com.example.modo_be.user.exception.UserException;
 import com.example.modo_be.user.exception.UserInvalidRequest;
 import com.example.modo_be.user.exception.UserNotFound;
 import com.example.modo_be.common.response.ErrorResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+@Slf4j
 @ControllerAdvice
 public class UserExceptionController {
 
@@ -57,5 +61,30 @@ public class UserExceptionController {
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
     }
+
+    @ResponseBody
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> argumentNotValidException(MethodArgumentNotValidException e){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("400")
+                .message(e.getBindingResult().getAllErrors().get(0).getDefaultMessage())
+                .build();
+
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> noArgumentSendException(HttpMessageNotReadableException e){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .code("400")
+                .message("Request body is missing.")
+                .build();
+
+
+        return ResponseEntity.badRequest().body(errorResponse);
+    }
+
+
 
 }
