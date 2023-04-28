@@ -1,6 +1,7 @@
 package com.example.modo_be.user.domain;
 
 
+import com.example.modo_be.auth.dto.TokenUserInfo;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,14 @@ public class User {
     private String userLibraryName;
 
     private String userPower;
+
+
+    public TokenUserInfo toTokenUserInfo(){
+        return TokenUserInfo.builder()
+                .userId(userId)
+                .userNickName(userNickName).build();
+    }
+
 
 
     @Builder

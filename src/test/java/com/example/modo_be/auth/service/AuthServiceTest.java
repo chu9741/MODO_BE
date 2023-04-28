@@ -1,7 +1,7 @@
 package com.example.modo_be.auth.service;
 
+import com.example.modo_be.auth.dto.TokenUserInfo;
 import com.example.modo_be.auth.request.SignInRequest;
-import com.example.modo_be.user.domain.User;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
 import com.example.modo_be.user.service.UserService;
@@ -47,10 +47,10 @@ class AuthServiceTest {
         //when
         SignInRequest signInRequest = SignInRequest.builder()
                 .userId("chu9741").password("chu970401").build();
-        User user = authService.validateUser(signInRequest);
+        TokenUserInfo tokenUserInfo = authService.validateUser(signInRequest);
 
         //then
-        assertEquals("chu9741",user.getUserId());
+        assertEquals("chu9741",tokenUserInfo.getUserId());
 
     }
 
