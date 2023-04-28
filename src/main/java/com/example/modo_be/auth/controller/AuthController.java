@@ -1,6 +1,7 @@
 package com.example.modo_be.auth.controller;
 
 
+import com.example.modo_be.auth.dto.TokenUserInfo;
 import com.example.modo_be.auth.request.SignInRequest;
 import com.example.modo_be.auth.response.SignInResponse;
 import com.example.modo_be.auth.service.AuthService;
@@ -29,10 +30,10 @@ public class AuthController {
     public ResponseEntity<?> signIn(@RequestBody @Valid SignInRequest signInRequest){
 
         //validation : Id => pw
-        User user = authService.validateUser(signInRequest);
+        TokenUserInfo tokenUserInfo = authService.validateUser(signInRequest);
 
         // token generate
-        String accessToken = tokenService.createToken(user);
+        String accessToken = tokenService.createToken(tokenUserInfo);
 
         return ResponseEntity.ok().body(new SignInResponse(accessToken));
 

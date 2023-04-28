@@ -1,6 +1,7 @@
 package com.example.modo_be.auth.service;
 
 
+import com.example.modo_be.auth.dto.TokenUserInfo;
 import com.example.modo_be.auth.exception.WrongPassword;
 import com.example.modo_be.auth.request.SignInRequest;
 import com.example.modo_be.user.domain.User;
@@ -19,7 +20,7 @@ public class AuthService {
     private final UserRepository userRepository;
 
 
-    public User validateUser(SignInRequest signInRequest){
+    public TokenUserInfo validateUser(SignInRequest signInRequest){
 
         if(!userRepository.existsByUserId(signInRequest.getUserId())){
             throw new UserNotFound();
@@ -32,7 +33,7 @@ public class AuthService {
             throw new WrongPassword();
         }
 
-        return user;
+        return user.toTokenUserInfo();
     }
 
 

@@ -63,18 +63,17 @@ class AuthControllerTest {
         //given
         SignInRequest signInRequest = SignInRequest.builder()
                 .userId("chu9741").password("chu970401").build();
-        //when
-        User user = authService.validateUser(signInRequest);
 
         String json = objectMapper.writeValueAsString(signInRequest);
+        //when
 
-
-        //then
         mockMvc.perform(post("/signin")
-                .contentType(APPLICATION_JSON)
-                .content(json))
+                        .contentType(APPLICATION_JSON)
+                        .content(json))
                 .andExpect(status().isOk())
                 .andDo(print());
+
+        //then
 
 
         //expected

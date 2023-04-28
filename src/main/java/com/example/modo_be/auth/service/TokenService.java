@@ -1,6 +1,8 @@
 package com.example.modo_be.auth.service;
 
+import com.example.modo_be.auth.dto.TokenUserInfo;
 import com.example.modo_be.user.domain.User;
+import com.example.modo_be.user.dto.PrimeUserInfo;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -27,7 +29,7 @@ public class TokenService {
 
     // token create
 
-    public String createToken(User user){
+    public String createToken(TokenUserInfo tokenUserInfo){
         Date now = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.MINUTE, EXPIRATED_MINUTE);
@@ -35,10 +37,10 @@ public class TokenService {
         // setExpiration 매개변수가 Date로 되어있어 LocalDateTime를 사용하지 못함
 
         return Jwts.builder()
-                .setSubject(user.getUserNickName()) // 이름
+                .setSubject(tokenUserInfo.getUserNickName()) // 이름
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
-                .setClaims(createClaims(user))
+                .setClaims(createClaims(tokenUserInfo))
                 .signWith(key)
                 .compact();
     }
@@ -67,13 +69,12 @@ public class TokenService {
 
 
 
-    private Map<String, Object> createClaims(User user) {
+    private Map<String, Object> createClaims(TokenUserInfo tokenUserInfo) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", user.getUserId()); // userId
-        claims.put("userNickName", user.getUserNickName());// 인가정보
+        claims.put("userId", tokenUserInfo.getUserId()); // userId
+        claims.put("userNickName", tokenUserInfo.getUserNickName());// 인가정보
         return claims;
 
     }
-    // token decode
 
 }
