@@ -35,7 +35,7 @@ public class AuthController {
         // token generate
         String accessToken = tokenService.createToken(tokenUserInfo);
 
-        return ResponseEntity.ok().body(new SignInResponse(accessToken));
+        return ResponseEntity.ok().body(new SignInResponse(accessToken,tokenUserInfo.getUserId()));
 
     }
         //token생성 -> token validation을 모든 controller에 담는다..? -> Args Resolver로 일괄 처리,,?

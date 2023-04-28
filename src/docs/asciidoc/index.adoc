@@ -1,0 +1,13 @@
+= MODO API
+:toc: left
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toclevels: 2
+:sectlinks:
+
+include::./src/docs/asciidoc/signup.adoc[]
+
+include::./src/docs/asciidoc/signin.adoc[]
+
+

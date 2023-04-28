@@ -1,0 +1,17 @@
+== 로그인
+
+=== 요청
+
+include::{snippets}/signin/http-request.adoc[]
+
+==== 요청 파라미터
+
+include::{snippets}/signin/request-fields.adoc[]
+
+=== 응답
+
+include::{snippets}/signin/http-response.adoc[]
+
+==== 응답 데이터
+
+include::{snippets}/signin/response-fields.adoc[]

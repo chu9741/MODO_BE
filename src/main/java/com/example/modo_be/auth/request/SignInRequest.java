@@ -1,8 +1,6 @@
 package com.example.modo_be.auth.request;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 

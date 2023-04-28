@@ -1,8 +1,6 @@
 package com.example.modo_be.auth.service;
 
 import com.example.modo_be.auth.dto.TokenUserInfo;
-import com.example.modo_be.user.domain.User;
-import com.example.modo_be.user.dto.PrimeUserInfo;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
