@@ -12,14 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.restdocs.RestDocumentationContext;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
-import org.springframework.restdocs.operation.preprocess.OperationRequestPreprocessor;
 import org.springframework.restdocs.payload.JsonFieldType;
-import org.springframework.restdocs.request.PathParametersSnippet;
-import org.springframework.restdocs.snippet.Snippet;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -92,13 +88,5 @@ public class UserControllerDocsTest {
                 )
                         ));
     }
-//
-//    .id("chu9741").pw("chu970401")
-//                .address("경기도 고양시").latitude("1").longitude("2")
-//                .nickName("최현욱").phoneNum("010-1234-5678").build();
-
-
-
-
 
 }
