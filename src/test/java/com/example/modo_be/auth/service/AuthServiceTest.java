@@ -29,20 +29,19 @@ class AuthServiceTest {
 
     @BeforeEach
     void beforeEach(){
-        if(userRepository.count()==0){
-//            userRepository.deleteAll();
-            SignUpRequest signUpRequest = SignUpRequest.builder()
-                    .id("chu9741").pw("chu970401")
-                    .address("경기도 고양시").latitude("1").longitude("2")
-                    .nickName("최현욱").phoneNum("010-1234-5678").build();
+        userRepository.deleteAll();
+        SignUpRequest signUpRequest = SignUpRequest.builder()
+                .id("chu9741").pw("chu970401")
+                .address("경기도 고양시").latitude("1").longitude("2")
+                .nickName("최현욱").phoneNum("010-1234-5678").build();
 
-            userService.signUp(signUpRequest);
-        }
+        userService.signUp(signUpRequest);
   }
 
     @Test
     @DisplayName("로그인 - 올바른 케이스")
     void test1(){
+
 
         //when
         SignInRequest signInRequest = SignInRequest.builder()
