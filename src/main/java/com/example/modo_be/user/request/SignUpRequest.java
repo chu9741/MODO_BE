@@ -36,13 +36,13 @@ public class SignUpRequest {
 
     public void passwordValidation(){
         if(pw.isBlank()){
-            throw new UserInvalidRequest(pw, "password is blank");
+            throw new UserInvalidRequest(pw, "비밀번호를 입력해야 합니다. ");
         }
         if(pw.equals("")){
-            throw new UserInvalidRequest(pw,"password is empty");
+            throw new UserInvalidRequest(pw,"비밀번호를 입력해야 합니다.");
         }
         if(pw.length() < 8){
-            throw new UserInvalidRequest(pw, "password must over 7 words.");
+            throw new UserInvalidRequest(pw, "비밀번호는 8자리 이상 입력해야 합니다.");
         }
         if(!pw.matches(".*[^a-zA-Z0-9].*")
                 && pw.matches(".*[0-9].*")
@@ -51,7 +51,7 @@ public class SignUpRequest {
             return;
         }
         else{
-            throw new UserInvalidRequest(pw, "password must contains only number and character.");
+            throw new UserInvalidRequest(pw, "비밀번호는 영문과 숫자만으로 이루어져야합니다.");
         }
     }
 
