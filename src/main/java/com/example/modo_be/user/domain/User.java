@@ -21,7 +21,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String userId;
+    private String userEmail;
 
     private String userPw;
     private String userPhoneNum;
@@ -44,19 +44,19 @@ public class User {
 
     public TokenUserInfo toTokenUserInfo(){
         return TokenUserInfo.builder()
-                .userId(userId)
+                .userEmail(userEmail)
                 .userNickName(userNickName).build();
     }
 
 
 
     @Builder
-    public User(long id, String userId, String userPw,
+    public User(long id, String userEmail, String userPw,
                 String userPhoneNum, String userNickName, String userGrade, String userIntroduction,
                 String userAddress, String userLongitude, String userLatitude,
                 String userLibraryName, String userPower) {
         this.id = id;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.userPw = userPw;
         this.userPhoneNum = userPhoneNum;
         this.userNickName = userNickName;

@@ -69,7 +69,7 @@ public class TokenService {
 
     private Map<String, Object> createClaims(TokenUserInfo tokenUserInfo) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("userId", tokenUserInfo.getUserId()); // userId
+        claims.put("userEmail", tokenUserInfo.getUserEmail()); // userEmail
         claims.put("userNickName", tokenUserInfo.getUserNickName());// 인가정보
         return claims;
 

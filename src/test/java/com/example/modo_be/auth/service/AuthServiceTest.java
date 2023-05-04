@@ -31,7 +31,7 @@ class AuthServiceTest {
     void beforeEach(){
         userRepository.deleteAll();
         SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("chu9741").pw("chu970401")
+                .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("최현욱").phoneNum("010-1234-5678").build();
 
@@ -45,11 +45,11 @@ class AuthServiceTest {
 
         //when
         SignInRequest signInRequest = SignInRequest.builder()
-                .userId("chu9741").password("chu970401").build();
+                .userEmail("chu9741").password("chu970401").build();
         TokenUserInfo tokenUserInfo = authService.validateUser(signInRequest);
 
         //then
-        assertEquals("chu9741",tokenUserInfo.getUserId());
+        assertEquals("chu9741",tokenUserInfo.getUserEmail());
 
     }
 

@@ -1,6 +1,8 @@
 package com.example.modo_be.user.service;
 
 import com.example.modo_be.user.domain.User;
+import com.example.modo_be.user.exception.UserAlreadyExist;
+import com.example.modo_be.user.exception.UserNotFound;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +36,7 @@ class UserServiceTest {
     public void test1(){
         //given
         SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("chu9741").pw("chu970401")
+                .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("김승민").phoneNum("010-1234-5678").build();
 
@@ -51,17 +53,41 @@ class UserServiceTest {
     void test2(){
         //given
         SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("chu9741").pw("chu970401")
+                .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("김승민").phoneNum("010-1234-5678").build();
 
 
         //when
-        User user = signUpRequest.toEntity(signUpRequest.getPw());
+        User user = signUpRequest.toEntity(signUpRequest.getPassword());
 
         //then
 
-        assertNotEquals(signUpRequest.getPw(),user.getUserPw());
+        assertNotEquals(signUpRequest.getPassword(),user.getUserPw());
+
+    }
+
+
+    @Test
+    @DisplayName("유저 회원가입 - 유저ID 중복")
+    public void test3(){
+        //given
+        SignUpRequest signUpRequest = SignUpRequest.builder()
+                .userEmail("chu9741").password("chu970401")
+                .address("경기도 고양시").latitude("1").longitude("2")
+                .nickName("김승민").phoneNum("010-1234-5678").build();
+
+        //when
+        userService.signUp(signUpRequest);
+
+
+
+
+        //then
+//        assertEquals(1L,userRepository.count());
+        UserAlreadyExist e =  assertThrows(UserAlreadyExist.class, () -> {
+            userService.signUp(signUpRequest);
+        });
 
     }
 }

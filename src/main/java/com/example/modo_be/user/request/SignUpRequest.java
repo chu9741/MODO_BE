@@ -14,10 +14,10 @@ import javax.validation.constraints.NotBlank;
 public class SignUpRequest {
 
     @NotBlank(message = "ID는 필수로 입력해야 합니다.")
-    private final String id;
+    private final String userEmail;
 
     @NotBlank(message = "PW는 필수로 입력해야 합니다.")
-    private final String pw;
+    private final String password;
 
     @NotBlank(message = "닉네임은 필수로 입력해야 합니다.")
     private final String nickName;
@@ -35,23 +35,23 @@ public class SignUpRequest {
     private final String phoneNum;
 
     public void passwordValidation(){
-        if(pw.isBlank()){
-            throw new UserInvalidRequest(pw, "비밀번호를 입력해야 합니다. ");
+        if(password.isBlank()){
+            throw new UserInvalidRequest(password, "비밀번호를 입력해야 합니다. ");
         }
-        if(pw.equals("")){
-            throw new UserInvalidRequest(pw,"비밀번호를 입력해야 합니다.");
+        if(password.equals("")){
+            throw new UserInvalidRequest(password,"비밀번호를 입력해야 합니다.");
         }
-        if(pw.length() < 8){
-            throw new UserInvalidRequest(pw, "비밀번호는 8자리 이상 입력해야 합니다.");
+        if(password.length() < 8){
+            throw new UserInvalidRequest(password, "비밀번호는 8자리 이상 입력해야 합니다.");
         }
-        if(!pw.matches(".*[^a-zA-Z0-9].*")
-                && pw.matches(".*[0-9].*")
-                && pw.toLowerCase().matches(".*[a-z].*")){
+        if(!password.matches(".*[^a-zA-Z0-9].*")
+                && password.matches(".*[0-9].*")
+                && password.toLowerCase().matches(".*[a-z].*")){
             //통과
             return;
         }
         else{
-            throw new UserInvalidRequest(pw, "비밀번호는 영문과 숫자만으로 이루어져야합니다.");
+            throw new UserInvalidRequest(password, "비밀번호는 영문과 숫자만으로 이루어져야합니다.");
         }
     }
 
@@ -59,7 +59,7 @@ public class SignUpRequest {
         // encrypt here , validation 반드시 진행 후 Entity 변환
         String encodePassword = encodePassWord(rawPw);
 
-        return User.builder().userId(this.id).userPw(encodePassword)
+        return User.builder().userEmail(this.userEmail).userPw(encodePassword)
                 .userAddress(this.address).userLatitude(this.latitude)
                 .userLongitude(this.longitude).userNickName(this.nickName)
                 .userPhoneNum(this.phoneNum)
@@ -72,9 +72,9 @@ public class SignUpRequest {
 
 
     @Builder
-    public SignUpRequest(String id, String pw, String nickName, String address, String longitude, String latitude, String phoneNum) {
-        this.id = id;
-        this.pw = pw;
+    public SignUpRequest(String userEmail, String password, String nickName, String address, String longitude, String latitude, String phoneNum) {
+        this.userEmail = userEmail;
+        this.password = password;
         this.nickName = nickName;
         this.address = address;
         this.longitude = longitude;

@@ -20,11 +20,11 @@ public class UserService {
         signUpRequest.passwordValidation();
 
         // ID duplicaiton check는 여기서
-        if(userRepository.existsByUserId(signUpRequest.getId())){
+        if(userRepository.existsByUserEmail(signUpRequest.getUserEmail())){
             throw new UserAlreadyExist();
         }
 
-        User user = signUpRequest.toEntity(signUpRequest.getPw());
+        User user = signUpRequest.toEntity(signUpRequest.getPassword());
         userRepository.save(user);
         // entity save
 

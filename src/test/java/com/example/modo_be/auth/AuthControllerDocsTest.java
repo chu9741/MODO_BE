@@ -46,7 +46,7 @@ public class AuthControllerDocsTest {
 
         userRepository.deleteAll();
         SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("modo@gmail.com").pw("modo1234")
+                .userEmail("modo@gmail.com").password("modo1234")
                 .address("경기도 수원시").latitude("37.541").longitude("126.986")
                 .nickName("김모도").phoneNum("010-1234-5678").build();
         userService.signUp(signUpRequest);
@@ -75,7 +75,7 @@ public class AuthControllerDocsTest {
     public void test1() throws Exception {
         //given
         SignInRequest signInRequest = SignInRequest.builder()
-                .userId("modo@gmail.com").password("modo1234").build();
+                .userEmail("modo@gmail.com").password("modo1234").build();
 
         String json = objectMapper.writeValueAsString(signInRequest);
 
@@ -87,12 +87,12 @@ public class AuthControllerDocsTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("signin", requestFields(
-                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 ID"),
+                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID"),
                                 fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호")
                         ),
                         responseFields(
                                 fieldWithPath("accessToken").type(JsonFieldType.STRING).description("액세스 토큰"),
-                                fieldWithPath("userId").type(JsonFieldType.STRING).description("유저 ID")
+                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID")
                         )
                 ));
     }

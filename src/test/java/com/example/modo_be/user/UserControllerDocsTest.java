@@ -64,7 +64,7 @@ public class UserControllerDocsTest {
     public void test1() throws Exception {
         //given
         SignUpRequest signUpRequest =SignUpRequest.builder()
-                .id("modo@gmail.com").pw("modo1234")
+                .userEmail("modo@gmail.com").password("modo1234")
                 .address("경기도 수원시").latitude("37.541").longitude("126.986")
                 .nickName("김모도").phoneNum("010-1234-5678").build();
 
@@ -78,8 +78,8 @@ public class UserControllerDocsTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andDo(document("signup", requestFields(
-                        fieldWithPath("id").type(JsonFieldType.STRING).description("유저 ID"),
-                        fieldWithPath("pw").type(JsonFieldType.STRING).description("비밀번호"),
+                        fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID"),
+                        fieldWithPath("password").type(JsonFieldType.STRING).description("비밀번호"),
                         fieldWithPath("address").type(JsonFieldType.STRING).description("주소"),
                         fieldWithPath("latitude").type(JsonFieldType.STRING).description("위도"),
                         fieldWithPath("longitude").type(JsonFieldType.STRING).description("경도"),

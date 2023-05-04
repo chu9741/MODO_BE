@@ -47,7 +47,7 @@ class AuthControllerTest {
     void beforeEach(){
         userRepository.deleteAll();
         SignUpRequest signUpRequest = SignUpRequest.builder()
-                .id("chu9741").pw("chu970401")
+                .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("최현욱").phoneNum("010-1234-5678").build();
         userService.signUp(signUpRequest);
@@ -60,7 +60,7 @@ class AuthControllerTest {
     void test1() throws Exception{
         //given
         SignInRequest signInRequest = SignInRequest.builder()
-                .userId("chu9741").password("chu970401").build();
+                .userEmail("chu9741").password("chu970401").build();
 
         String json = objectMapper.writeValueAsString(signInRequest);
 

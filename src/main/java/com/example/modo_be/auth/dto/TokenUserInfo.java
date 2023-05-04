@@ -6,13 +6,13 @@ import lombok.Getter;
 @Getter
 public class TokenUserInfo {
 
-    private final String userId;
+    private final String userEmail;
     private final String userNickName;
 
 
     @Builder
-    public TokenUserInfo(String userId, String userNickName) {
-        this.userId = userId;
+    public TokenUserInfo(String userEmail, String userNickName) {
+        this.userEmail = userEmail;
         this.userNickName = userNickName;
     }
 }
