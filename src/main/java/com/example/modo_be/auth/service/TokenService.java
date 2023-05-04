@@ -35,7 +35,7 @@ public class TokenService {
         // setExpiration 매개변수가 Date로 되어있어 LocalDateTime를 사용하지 못함
 
         return Jwts.builder()
-                .setSubject(tokenUserInfo.getUserNickName()) // 이름
+                .setSubject(tokenUserInfo.getUserEmail()) // 이름
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
                 .setClaims(createClaims(tokenUserInfo))
