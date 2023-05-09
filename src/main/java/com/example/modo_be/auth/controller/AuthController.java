@@ -29,16 +29,12 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> signIn(@RequestBody @Valid SignInRequest signInRequest){
 
-        //validation : Id => pw
         TokenUserInfo tokenUserInfo = authService.validateUser(signInRequest);
 
-        // token generate
         String accessToken = tokenService.createToken(tokenUserInfo);
         SignInResponse signInResponse =  authService.setSignInResponseInfo(tokenUserInfo,accessToken);
 
         return ResponseEntity.ok().body(signInResponse);
 
     }
-        //token생성 -> token validation을 모든 controller에 담는다..? -> Args Resolver로 일괄 처리,,?
-
 }
