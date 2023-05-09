@@ -2,17 +2,18 @@ package com.example.modo_be.user.domain;
 
 
 import com.example.modo_be.auth.dto.TokenUserInfo;
+import com.example.modo_be.book.domain.Book;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 public class User {
 
@@ -21,7 +22,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String userId;
+    @OneToMany(mappedBy = "user")
+    private List<Book> books;
+
+    private String userEmail;
 
     private String userPw;
     private String userPhoneNum;
@@ -44,19 +48,19 @@ public class User {
 
     public TokenUserInfo toTokenUserInfo(){
         return TokenUserInfo.builder()
-                .userId(userId)
+                .userEmail(userEmail)
                 .userNickName(userNickName).build();
     }
 
 
 
     @Builder
-    public User(long id, String userId, String userPw,
+    public User(long id, String userEmail, String userPw,
                 String userPhoneNum, String userNickName, String userGrade, String userIntroduction,
                 String userAddress, String userLongitude, String userLatitude,
                 String userLibraryName, String userPower) {
         this.id = id;
-        this.userId = userId;
+        this.userEmail = userEmail;
         this.userPw = userPw;
         this.userPhoneNum = userPhoneNum;
         this.userNickName = userNickName;

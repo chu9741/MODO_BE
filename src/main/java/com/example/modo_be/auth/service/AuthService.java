@@ -22,11 +22,11 @@ public class AuthService {
 
     public TokenUserInfo validateUser(SignInRequest signInRequest){
 
-        if(!userRepository.existsByUserId(signInRequest.getUserId())){
+        if(!userRepository.existsByUserEmail(signInRequest.getUserEmail())){
             throw new UserNotFound();
         }
 
-        User user = userRepository.findByUserId(signInRequest.getUserId());
+        User user = userRepository.findByUserEmail(signInRequest.getUserEmail());
 
 
         if(!BCrypt.checkpw(signInRequest.getPassword(),user.getUserPw())){

@@ -10,4 +10,6 @@ include::./src/docs/asciidoc/signup.adoc[]
 
 include::./src/docs/asciidoc/signin.adoc[]
 
+include::./src/docs/asciidoc/naver-book.adoc[]
 
+include::./src/docs/asciidoc/book-post.adoc[]

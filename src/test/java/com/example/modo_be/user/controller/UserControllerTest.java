@@ -45,7 +45,7 @@ class UserControllerTest {
     public void test1() throws Exception {
         //given
         SignUpRequest signUpRequest =SignUpRequest.builder()
-                .id("chu9741").pw("chu970401")
+                .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")
                 .nickName("최현욱").phoneNum("010-1234-5678").build();
 
