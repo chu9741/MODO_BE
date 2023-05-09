@@ -1,0 +1,22 @@
+== 네이버 검색 API
+
+=== 요청
+
+include::{snippets}/naver-books/http-request.adoc[]
+
+==== 요청 헤더
+include::{snippets}/naver-books/request-headers.adoc[]
+
+==== 쿼리 파라미터
+include::{snippets}/naver-books/request-parameters.adoc[]
+
+==== 요청 파라미터
+include::{snippets}/naver-books/request-fields.adoc[]
+
+=== 응답
+
+include::{snippets}/naver-books/http-response.adoc[]
+
+==== 응답 데이터
+
+include::{snippets}/naver-books/response-fields.adoc[]
