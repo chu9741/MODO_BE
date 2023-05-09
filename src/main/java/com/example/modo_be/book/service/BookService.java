@@ -1,12 +1,18 @@
 package com.example.modo_be.book.service;
 
+import com.example.modo_be.book.domain.Book;
 import com.example.modo_be.book.exception.BookNotFoundException;
+import com.example.modo_be.book.repository.BookRepository;
 import com.example.modo_be.book.request.NaverHeaderRequest;
+import com.example.modo_be.book.request.PostBookRequest;
 import com.example.modo_be.book.response.NaverBookInfo;
 import com.example.modo_be.book.response.NaverBookResponse;
+import com.example.modo_be.user.domain.User;
+import com.example.modo_be.user.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +25,20 @@ import java.util.List;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class BookService {
+
+    private final UserRepository userRepository;
+    private final BookRepository bookRepository;
+    public void postBook(PostBookRequest postBookRequest, String userEmail){
+        User user = userRepository.findByUserEmail(userEmail);
+        Book newBook = postBookRequest.toEntity();
+        newBook.addUser(user);
+        bookRepository.save(newBook);
+
+    }
+
+
     public List<NaverBookInfo> getNaverBookList(NaverHeaderRequest naverHeaderRequest, String bookTitle) throws JsonProcessingException {
 
         // 네이버 검색 API 요청
