@@ -92,7 +92,9 @@ public class AuthControllerDocsTest {
                         ),
                         responseFields(
                                 fieldWithPath("accessToken").type(JsonFieldType.STRING).description("액세스 토큰"),
-                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID")
+                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID"),
+                                fieldWithPath("naverClientId").type(JsonFieldType.STRING).description("네이버 클라이언트 ID"),
+                                fieldWithPath("naverClientSecret").type(JsonFieldType.STRING).description("네이버 클라이언트 Secret")
                         )
                 ));
     }

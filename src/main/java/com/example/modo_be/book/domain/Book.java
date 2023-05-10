@@ -31,11 +31,15 @@ public class Book {
     private int bookPrice;
     private String bookAddress;
 
+    private String bookBorrowUserEmail;
+
+
     @CreatedDate
     private LocalDateTime createdAt;
 
     public void addUser(User user){
         user.getBooks().add(this);
+        this.setBookAddress(user.getUserAddress());
         this.setUser(user);
     }
 

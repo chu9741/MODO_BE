@@ -1,6 +1,5 @@
 package com.example.modo_be.auth.config;
 
-//import com.example.modo_be.auth.component.BearerAuthInterceptor;
 import com.example.modo_be.auth.component.BearerAuthInterceptor;
 import com.example.modo_be.auth.service.TokenService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +14,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthConfig implements WebMvcConfigurer {
 
-//    private final BearerAuthInterceptor bearerAuthInterceptor;
     private final TokenService tokenService;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
