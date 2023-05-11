@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -37,6 +38,14 @@ public class BookService {
         bookRepository.save(newBook);
 
     }
+
+//    public List<BookResponse> searchBooks(String bookTitle){
+//        List<Book> bookList = bookRepository.findByBookTitleContainsIgnoreCase(bookTitle);
+//        List<BookResponse> bookResponseListList = new ArrayList();
+//        for(Book book : bookList){
+//
+//        }
+//    }
 
 
     public List<NaverBookInfo> getNaverBookList(NaverHeaderRequest naverHeaderRequest, String bookTitle) throws JsonProcessingException {

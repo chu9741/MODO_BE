@@ -5,6 +5,7 @@ import com.example.modo_be.auth.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -21,6 +22,14 @@ public class AuthConfig implements WebMvcConfigurer {
         registry.addInterceptor(new BearerAuthInterceptor(tokenService))
                 .addPathPatterns("/**")
                 .excludePathPatterns("/signin","/signup","/","/docs/**");
+
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOriginPatterns("*")
+                .allowedMethods("*");
 
     }
 
