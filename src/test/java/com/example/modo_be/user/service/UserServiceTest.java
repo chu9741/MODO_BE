@@ -1,5 +1,6 @@
 package com.example.modo_be.user.service;
 
+import com.example.modo_be.book.repository.BookRepository;
 import com.example.modo_be.user.domain.User;
 import com.example.modo_be.user.exception.UserAlreadyExist;
 import com.example.modo_be.user.exception.UserNotFound;
@@ -23,11 +24,15 @@ class UserServiceTest {
     UserRepository userRepository;
 
     @Autowired
+    BookRepository bookRepository;
+
+    @Autowired
     UserService userService;
 
     @BeforeEach
     void beforeEach(){
         userRepository.deleteAll();
+        bookRepository.deleteAll();
     }
 
 

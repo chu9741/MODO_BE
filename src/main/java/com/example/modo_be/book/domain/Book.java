@@ -1,12 +1,14 @@
 package com.example.modo_be.book.domain;
 
 
+import com.example.modo_be.book.response.BookResponse;
 import com.example.modo_be.user.domain.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 @Setter
+@EntityListeners(AuditingEntityListener.class)
 public class Book {
 
     @Id
@@ -31,12 +34,30 @@ public class Book {
     private int bookPrice;
     private String bookAddress;
 
+    private String bookBorrowUserEmail;
+
+    private boolean isLoaned;
+
+
     @CreatedDate
     private LocalDateTime createdAt;
 
     public void addUser(User user){
         user.getBooks().add(this);
+        this.setBookAddress(user.getUserAddress());
         this.setUser(user);
+    }
+
+    public BookResponse toBookResponse(){
+        return BookResponse.builder()
+                .bookId(this.id)
+                .bookTitle(this.bookTitle)
+                .bookAuthor(this.bookAuthor)
+                .bookDescription(this.bookDescription)
+                .bookPrice(this.bookPrice)
+                .createdAt(String.valueOf(this.createdAt))
+                .bookBorrowUserEmail(this.bookBorrowUserEmail==null? "":this.bookBorrowUserEmail)
+                .bookImageUrl(this.bookImageUrl).build();
     }
 
     @Builder
@@ -50,5 +71,6 @@ public class Book {
         this.bookPrice = bookPrice;
         this.bookAddress = bookAddress;
         this.createdAt = createdAt;
+        this.isLoaned=false;
     }
 }

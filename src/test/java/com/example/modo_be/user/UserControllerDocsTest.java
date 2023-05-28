@@ -1,6 +1,7 @@
 package com.example.modo_be.user;
 
 
+import com.example.modo_be.book.repository.BookRepository;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
 import com.example.modo_be.user.service.UserService;
@@ -40,6 +41,9 @@ public class UserControllerDocsTest {
                 .addFilters(new CharacterEncodingFilter("UTF-8", true))
                 .alwaysDo(print())
                 .build();
+        bookRepository.deleteAll();
+        userRepository.deleteAll();
+
     }
     @Autowired
     ObjectMapper objectMapper;
@@ -53,11 +57,8 @@ public class UserControllerDocsTest {
     @Autowired
     UserRepository userRepository;
 
-    @BeforeEach
-    void deleteRepository(){
-        userRepository.deleteAll();
-    }
-
+    @Autowired
+    BookRepository bookRepository;
 
     @Test
     @DisplayName("유저 생성")

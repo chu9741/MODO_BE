@@ -44,7 +44,10 @@ public class AuthControllerDocsTest {
                 .alwaysDo(print())
                 .build();
 
-        userRepository.deleteAll();
+        if(userRepository.count()!=0){
+            return;
+        }
+
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .userEmail("modo@gmail.com").password("modo1234")
                 .address("경기도 수원시").latitude("37.541").longitude("126.986")
@@ -75,7 +78,8 @@ public class AuthControllerDocsTest {
     public void test1() throws Exception {
         //given
         SignInRequest signInRequest = SignInRequest.builder()
-                .userEmail("modo@gmail.com").password("modo1234").build();
+                .userEmail("chu9741").password("chu970401").build();
+
 
         String json = objectMapper.writeValueAsString(signInRequest);
 
@@ -92,7 +96,9 @@ public class AuthControllerDocsTest {
                         ),
                         responseFields(
                                 fieldWithPath("accessToken").type(JsonFieldType.STRING).description("액세스 토큰"),
-                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID")
+                                fieldWithPath("userEmail").type(JsonFieldType.STRING).description("유저 ID"),
+                                fieldWithPath("naverClientId").type(JsonFieldType.STRING).description("네이버 클라이언트 ID"),
+                                fieldWithPath("naverClientSecret").type(JsonFieldType.STRING).description("네이버 클라이언트 Secret")
                         )
                 ));
     }

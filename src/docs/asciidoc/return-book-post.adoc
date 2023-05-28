@@ -1,0 +1,13 @@
+== 책 반납
+
+=== 요청
+include::{snippets}/return-book-post/http-request.adoc[]
+
+==== 요청 헤더
+include::{snippets}/return-book-post/request-headers.adoc[]
+
+==== 요청 파라미터
+include::{snippets}/return-book-post/request-parameters.adoc[]
+
+=== 응답
+include::{snippets}/return-book-post/http-response.adoc[]
