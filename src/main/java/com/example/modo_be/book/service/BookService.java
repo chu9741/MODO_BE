@@ -5,6 +5,7 @@ import com.example.modo_be.book.exception.BookNotFoundException;
 import com.example.modo_be.book.repository.BookRepository;
 import com.example.modo_be.book.request.NaverHeaderRequest;
 import com.example.modo_be.book.request.PostBookRequest;
+import com.example.modo_be.book.response.BookResponse;
 import com.example.modo_be.book.response.NaverBookInfo;
 import com.example.modo_be.book.response.NaverBookResponse;
 import com.example.modo_be.user.domain.User;
@@ -23,6 +24,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -39,14 +42,41 @@ public class BookService {
 
     }
 
-//    public List<BookResponse> searchBooks(String bookTitle){
-//        List<Book> bookList = bookRepository.findByBookTitleContainsIgnoreCase(bookTitle);
-//        List<BookResponse> bookResponseListList = new ArrayList();
-//        for(Book book : bookList){
-//
-//        }
-//    }
+    public List<BookResponse>lendBookList(String userEmail){
 
+        return bookRepository.findAll().stream()
+                .filter(book -> book.getUser().getUserEmail().equals(userEmail))
+                .map(book -> book.toBookResponse()).collect(Collectors.toList());
+    }
+
+    public List<BookResponse>borrowBookList(String userEmail){
+        List<Book> bookList = bookRepository.findAll();
+        List<BookResponse> bookResponseList = new ArrayList<>();
+        bookList.forEach(book -> {if(Objects.equals(book.getBookBorrowUserEmail(), userEmail)){
+            bookResponseList.add(book.toBookResponse());
+        }});
+        return bookResponseList;
+
+    }
+
+    public void returnBook(Long bookId){
+        Book book = bookRepository.findById(bookId).orElseThrow(()-> new BookNotFoundException("찾는 책이 없습니다."));
+        book.setLoaned(false);
+        book.setBookBorrowUserEmail(null);
+        bookRepository.save(book);
+    }
+
+
+    public void borrowBook(Long bookId, String userEmail){
+        Book book = bookRepository.findById(bookId).orElseThrow(()-> new BookNotFoundException("찾는 책이 없습니다."));
+        book.setLoaned(true);
+        book.setBookBorrowUserEmail(userEmail);
+        bookRepository.save(book);
+    }
+
+    public List<BookResponse> getAllBooks(){
+        return bookRepository.findAll().stream().filter(book -> !book.isLoaned()).map(Book::toBookResponse).collect(Collectors.toList());
+    }
 
     public List<NaverBookInfo> getNaverBookList(NaverHeaderRequest naverHeaderRequest, String bookTitle) throws JsonProcessingException {
 

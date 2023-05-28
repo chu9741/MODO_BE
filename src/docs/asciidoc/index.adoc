@@ -13,3 +13,14 @@ include::./src/docs/asciidoc/signin.adoc[]
 include::./src/docs/asciidoc/naver-book.adoc[]
 
 include::./src/docs/asciidoc/book-post.adoc[]
+
+include::./src/docs/asciidoc/books-get.adoc[]
+
+include::./src/docs/asciidoc/borrow-book-post.adoc[]
+
+include::./src/docs/asciidoc/borrow-book-get.adoc[]
+
+include::./src/docs/asciidoc/lend-books-get.adoc[]
+
+include::./src/docs/asciidoc/return-book-post.adoc[]
+
