@@ -1,0 +1,13 @@
+== 책 대여
+
+=== 요청
+include::{snippets}/borrow-book-post/http-request.adoc[]
+
+==== 요청 헤더
+include::{snippets}/borrow-book-post/request-headers.adoc[]
+
+==== 요청 파라미터
+include::{snippets}/borrow-book-post/request-parameters.adoc[]
+
+=== 응답
+include::{snippets}/borrow-book-post/http-response.adoc[]

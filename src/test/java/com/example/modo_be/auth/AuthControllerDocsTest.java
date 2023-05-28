@@ -44,7 +44,10 @@ public class AuthControllerDocsTest {
                 .alwaysDo(print())
                 .build();
 
-        userRepository.deleteAll();
+        if(userRepository.count()!=0){
+            return;
+        }
+
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .userEmail("modo@gmail.com").password("modo1234")
                 .address("경기도 수원시").latitude("37.541").longitude("126.986")
@@ -75,7 +78,8 @@ public class AuthControllerDocsTest {
     public void test1() throws Exception {
         //given
         SignInRequest signInRequest = SignInRequest.builder()
-                .userEmail("modo@gmail.com").password("modo1234").build();
+                .userEmail("chu9741").password("chu970401").build();
+
 
         String json = objectMapper.writeValueAsString(signInRequest);
 

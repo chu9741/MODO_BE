@@ -29,7 +29,10 @@ class AuthServiceTest {
 
     @BeforeEach
     void beforeEach(){
-        userRepository.deleteAll();
+
+        if(userRepository.count()!=0){
+            return;
+        }
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .userEmail("chu9741").password("chu970401")
                 .address("경기도 고양시").latitude("1").longitude("2")

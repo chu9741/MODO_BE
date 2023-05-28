@@ -1,5 +1,6 @@
 package com.example.modo_be.user.controller;
 
+import com.example.modo_be.book.repository.BookRepository;
 import com.example.modo_be.user.repository.UserRepository;
 import com.example.modo_be.user.request.SignUpRequest;
 import com.example.modo_be.user.service.UserService;
@@ -33,10 +34,13 @@ class UserControllerTest {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    BookRepository bookRepository;
 
     @BeforeEach
     void deleteRepository(){
         userRepository.deleteAll();
+        bookRepository.deleteAll();
     }
 
 
