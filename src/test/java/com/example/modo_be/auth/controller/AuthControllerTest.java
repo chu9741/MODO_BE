@@ -21,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.http.MediaType.APPLICATION_JSON;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @Slf4j
@@ -45,6 +46,10 @@ class AuthControllerTest {
 
     @BeforeEach
     void beforeEach(){
+        if(userRepository.count()!=0){
+            return;
+        }
+
         userRepository.deleteAll();
         SignUpRequest signUpRequest = SignUpRequest.builder()
                 .userEmail("chu9741").password("chu970401")

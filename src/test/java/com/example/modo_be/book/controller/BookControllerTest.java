@@ -75,7 +75,7 @@ class BookControllerTest {
         NaverHeaderRequest naverHeaderRequest = naverConfig.toNaverHeaderRequest();
         String booktTitle = "어린 왕자";
 
-        String accessToken="Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOiJtb2RvQGdtYWlsLmNvbSIsInVzZXJOaWNrTmFtZSI6Iuq5gOuqqOuPhCIsImlhdCI6MTY4MzcwNTEzNiwiZXhwIjoxNjgzODg1MTM2fQ.WcRDGaEg46JkR_qw2TJ4iPahlHO23uKVB0DHQO9XbkU";
+        String accessToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOiJjaHU5NzQxIiwidXNlck5pY2tOYW1lIjoi7LWc7ZiE7JqxIiwiaWF0IjoxNjg1MDU5NjMxLCJleHAiOjE2ODUyMzk2MzF9.ToZqXkijKRNZZkU1UTb8qgreYgOslvRuqmNn7GtZHo4";
 
         String json = objectMapper.writeValueAsString(naverHeaderRequest);
         //expected
@@ -97,7 +97,7 @@ class BookControllerTest {
                 .bookAuthor("생텍쥐베리").bookPrice(2000).bookDescription("어린 왕자")
                 .build();
 
-        String accessToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOiJtb2RvQGdtYWlsLmNvbSIsInVzZXJOaWNrTmFtZSI6Iuq5gOuqqOuPhCIsImlhdCI6MTY4MzcwNTEzNiwiZXhwIjoxNjgzODg1MTM2fQ.WcRDGaEg46JkR_qw2TJ4iPahlHO23uKVB0DHQO9XbkU";
+        String accessToken = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyRW1haWwiOiJjaHU5NzQxIiwidXNlck5pY2tOYW1lIjoi7LWc7ZiE7JqxIiwiaWF0IjoxNjg1MDU5NjMxLCJleHAiOjE2ODUyMzk2MzF9.ToZqXkijKRNZZkU1UTb8qgreYgOslvRuqmNn7GtZHo4";
         String json = objectMapper.writeValueAsString(postBookRequest);
 
         //expected
