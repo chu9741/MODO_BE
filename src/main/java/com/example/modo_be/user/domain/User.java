@@ -24,7 +24,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Book> books;
-
+    // books
     private String userEmail;
 
     private String userPw;
