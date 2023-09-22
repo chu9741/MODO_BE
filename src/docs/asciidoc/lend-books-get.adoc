@@ -1,0 +1,13 @@
+== 빌려준 책 리스트
+
+=== 요청
+include::{snippets}/lend-books-get/http-request.adoc[]
+
+==== 요청 헤더
+include::{snippets}/lend-books-get/request-headers.adoc[]
+
+=== 응답
+include::{snippets}/lend-books-get/http-response.adoc[]
+
+===응답 데이터
+include::{snippets}/lend-books-get/response-fields.adoc[]

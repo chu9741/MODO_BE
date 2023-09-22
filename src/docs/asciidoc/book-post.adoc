@@ -1,0 +1,16 @@
+== 책 등록
+
+=== 요청
+
+include::{snippets}/book-post/http-request.adoc[]
+
+==== 요청 헤더
+include::{snippets}/book-post/request-headers.adoc[]
+
+==== 요청 파라미터
+include::{snippets}/book-post/request-fields.adoc[]
+
+=== 응답
+
+include::{snippets}/book-post/http-response.adoc[]
+
